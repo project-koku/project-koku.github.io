@@ -1,12 +1,13 @@
 FROM registry.fedoraproject.org/fedora:31
 
-RUN mkdir -p /home/koku/website
-RUN mkdir -p /home/koku/bin
 RUN dnf -y install ruby-devel make gcc gcc-c++ redhat-rpm-config zlib-devel rubygem-nokogiri git
 
+RUN mkdir -p /home/koku/website
+RUN mkdir -p /home/koku/bin
+
 WORKDIR /home/koku/website
-RUN gem install bundle
-RUN gem install jekyll
+
+RUN gem install bundle && gem install jekyll
 
 COPY . /home/koku/website
 RUN bundle install
