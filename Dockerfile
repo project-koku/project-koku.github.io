@@ -6,8 +6,7 @@ RUN set -x && \
     dnf clean all && \
     rm -rf /var/cache/yum /var/cache/dnf
 
-RUN mkdir -p /home/koku/website
-RUN mkdir -p /home/koku/bin
+RUN mkdir -p /home/koku/website /home/koku/bin
 
 WORKDIR /home/koku/website
 
