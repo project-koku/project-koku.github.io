@@ -25,6 +25,6 @@ To run it locally on your machine:
  - Run the container
 
    ```sh
-   docker run --rm -d -p 4000:4000 -v "${PWD}":/home/koku/website koku-project
+   docker run --rm -d -p 4000:4000 koku-project
    ```
  - Open your browser and visit `localhost:4000`
