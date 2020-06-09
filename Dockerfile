@@ -1,4 +1,4 @@
-FROM fedora:31
+FROM registry.fedoraproject.org/fedora:31
 
 RUN mkdir -p /home/koku/website
 RUN mkdir -p /home/koku/bin
