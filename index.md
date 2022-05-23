@@ -26,11 +26,11 @@ Koku allows you to simplify management of resources and costs across these curre
 # Documentation
 
 Learn about Koku with the detailed guides on:
-- [User Management]({{ site.docs_url }}en/latest/users.html) and [Source Management]({{ site.docs_url }}en/latest/sources.html)
+- [User Management]({{ site.docs_url }}users.rst) and [Source Management]({{ site.docs_url }}sources)
   - These cover the customer owner, adding and removing users, and managing resources
-- [Development Information]({{ site.docs_url }}en/latest/development.html)
+- [Development Information](https://github.com/project-koku/koku/blob/main/README.rst#development)
   - Find out how to start developing for and contributing to Koku
-- [Installation]({{ site.docs_url }}en/latest/install.html)
+- [Installation]({{ site.docs_url }}install.rst)
   - This section details the various components that need to be deployed to run Koku
 
 ## Architecture
