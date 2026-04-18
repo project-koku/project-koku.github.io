@@ -1,30 +1,29 @@
-## Landing page for Project Koku (hosted on GitHub Pages)
+# Project Koku Website
 
-### Run it locally
+Landing page and documentation for [Project Koku](https://github.com/project-koku),
+hosted on [GitHub Pages](https://project-koku.github.io/).
 
-To run it locally on your machine:
- - Install `Docker` and `git`
- - clone this repository
-  
-    ```sh
-    git clone https://github.com/project-koku/project-koku.github.io.git
-    ```
+Built with [Hugo](https://gohugo.io/) and the
+[Hextra](https://github.com/imfing/hextra) theme.
 
- - Change directory to `project-koku.github.io.git`
+## Local development
 
-   ```sh
-   cd project-koku.github.io.git
-   ```
+Prerequisites: [Hugo Extended](https://gohugo.io/installation/) (v0.147+)
+and [Go](https://go.dev/dl/) (1.23+).
 
- - Build the container image by executing
+```bash
+git clone https://github.com/project-koku/project-koku.github.io.git
+cd project-koku.github.io
+make serve        # http://localhost:1313
+```
 
-   ```sh
-   docker build -t koku-project .
-   ```
+To build the static site for production:
 
- - Run the container
+```bash
+make build        # output in public/
+```
 
-   ```sh
-   docker run --rm -d -p 4000:4000 koku-project
-   ```
- - Open your browser and visit `localhost:4000`
+## Deployment
+
+Pushes to `main` trigger the GitHub Actions workflow in
+`.github/workflows/hugo.yaml`, which builds and deploys to GitHub Pages.
