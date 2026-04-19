@@ -4,7 +4,7 @@ build:
 	hugo --gc --minify
 
 serve:
-	hugo server
+	hugo server -D
 
 clean:
 	rm -rf public/
