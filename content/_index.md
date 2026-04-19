@@ -1,9 +1,10 @@
 ---
-title: Project Koku
+title: ""
 toc: false
 ---
 
-<div class="hx-mt-6"></div>
+<div style="display: flex; align-items: flex-start; gap: 3rem; margin-top: 1.5rem;">
+<div style="flex: 1;">
 
 {{< hextra/hero-headline >}}
   Project Koku
@@ -19,6 +20,12 @@ toc: false
 
 {{< hextra/hero-button text="Get Started" link="docs" >}}
 {{< hextra/hero-button text="View on GitHub" link="https://github.com/project-koku" >}}
+
+</div>
+<div style="flex-shrink: 0; padding-top: 0.25rem;">
+  <img src="/img/koku-logo-vertical.svg" alt="Koku Logo" style="width: 220px; height: auto;" />
+</div>
+</div>
 
 <div class="hx-mt-6"></div>
 

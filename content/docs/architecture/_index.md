@@ -4,16 +4,15 @@ type: docs
 weight: 2
 ---
 
-# Architecture
-
 This page describes the high-level architecture of the Koku platform, the data
 flow from metering to reporting, and the responsibilities of each component.
 
 ## High-Level Data Flow
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph sources [Data Sources]
+        direction LR
         AWS[AWS CUR]
         Azure[Azure Exports]
         GCP[GCP BigQuery]
@@ -21,16 +20,17 @@ flowchart LR
     end
 
     subgraph kokuBackend [Koku Backend]
-        Masu[Masu Pipeline<br/>Celery Workers]
-        S3[S3 / MinIO<br/>Parquet Storage]
-        Trino[Trino<br/>cloud only]
+        Masu[Masu Pipeline · Celery Workers]
+        S3[S3 / MinIO · Parquet Storage]
+        Trino[Trino · cloud only]
         PG[(PostgreSQL)]
-        API[REST API<br/>Django]
+        API[REST API · Django]
     end
 
     subgraph consumers [Consumers]
-        UI[koku-ui<br/>React]
-        ExtAPI[External Systems<br/>Billing / ERP / BI]
+        direction LR
+        UI[koku-ui · React]
+        ExtAPI[External Systems · Billing / ERP / BI]
     end
 
     AWS --> Masu

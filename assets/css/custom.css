@@ -5,3 +5,16 @@
   align-items: center !important;
   margin: 0 auto !important;
 }
+
+/* Mermaid diagrams: undo code-block styling that Hextra applies to <pre>. */
+pre.mermaid {
+  background: none !important;
+  border: none !important;
+  text-align: center;
+  overflow: visible !important;
+}
+pre.mermaid svg {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+}

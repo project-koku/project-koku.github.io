@@ -1,0 +1,92 @@
+{{- /* Mermaid – local override: adds viewBox padding after render */ -}}
+
+{{- $mermaidBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.mermaid.base -}}
+  {{- $mermaidBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- $mermaidJsAsset := "" -}}
+{{- with site.Params.mermaid.js -}}
+  {{- $mermaidJsAsset = . -}}
+{{- end -}}
+
+{{- if and $useDefaultCdn (ne $mermaidJsAsset "") -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- if $useDefaultCdn -}}
+  {{- $mermaidBase = "https://cdn.jsdelivr.net/npm/mermaid@latest/dist" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $mermaidBase "http://") (strings.HasPrefix $mermaidBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $mermaidJsAsset "") $mermaidJsAsset (printf "mermaid%s.js" $minSuffix) -}}
+  {{- $mermaidJsUrl := urls.JoinPath $mermaidBase $jsPath -}}
+  {{- with try (resources.GetRemote $mermaidJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Mermaid js file from %s. Reason: %s." $mermaidJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/mermaid%s.js" $minSuffix) . -}}
+        {{- $mermaidJs := . | fingerprint -}}
+        <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $mermaidJsAsset -}}
+  {{- with resources.Get $mermaidJsAsset -}}
+    {{- $mermaidJs := . | fingerprint -}}
+    <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Mermaid js asset not found at %q" $mermaidJsAsset -}}
+  {{- end -}}
+{{- end -}}
+
+<script>
+  function fixMermaidViewBoxes() {
+    document.querySelectorAll("pre.mermaid svg").forEach(function(svg) {
+      var bbox = svg.getBBox();
+      var pad = 10;
+      var vb = (bbox.x - pad) + " " + (bbox.y - pad) + " " +
+               (bbox.width + pad * 2) + " " + (bbox.height + pad * 2);
+      svg.setAttribute("viewBox", vb);
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
+      svg.removeAttribute("style");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".mermaid").forEach(function(el) {
+      el.dataset.original = el.innerHTML;
+    });
+
+    var theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+    mermaid.initialize({ startOnLoad: true, theme: theme });
+
+    setTimeout(fixMermaidViewBoxes, 300);
+    setTimeout(fixMermaidViewBoxes, 1000);
+
+    var timeout;
+    new MutationObserver(function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        var theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+        document.querySelectorAll(".mermaid").forEach(function(el) {
+          el.innerHTML = el.dataset.original;
+          el.removeAttribute("data-processed");
+        });
+        mermaid.initialize({ startOnLoad: true, theme: theme });
+        mermaid.init();
+        setTimeout(fixMermaidViewBoxes, 300);
+        setTimeout(fixMermaidViewBoxes, 1000);
+      }, 150);
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  });
+</script>

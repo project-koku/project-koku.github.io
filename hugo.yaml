@@ -50,7 +50,12 @@ params:
 
   navbar:
     displayTitle: true
-    displayLogo: false
+    displayLogo: true
+    logo:
+      path: img/logo-notext.svg
+      dark: img/logo-dark-notext.svg
+      width: 28
+      height: 28
     displayThemeToggle: true
 
   page:
@@ -68,9 +73,13 @@ params:
     enable: true
     base: "https://github.com/project-koku/project-koku.github.io/edit/main"
 
+  mermaid:
+    base: "https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist"
+
 markup:
   goldmark:
     renderer:
       unsafe: true
   highlight:
     noClasses: false
+
