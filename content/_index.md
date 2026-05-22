@@ -87,7 +87,7 @@ OpenShift runs on, including IBM Z, LinuxOne, POWER, x86-64, and ARM.
 
 {{< cards >}}
   {{< card link="docs" title="Documentation" icon="book-open" subtitle="Architecture, guides, and technical documentation" >}}
-  {{< card link="docs/integrations" title="Integrations" icon="puzzle-piece" subtitle="Lago billing, Grafana dashboards, Power BI reports" >}}
+  {{< card link="docs/integrations" title="Integrations" icon="puzzle" subtitle="Lago billing, Grafana dashboards, Power BI reports" >}}
   {{< card link="docs/ecosystem" title="Ecosystem" icon="collection" subtitle="All the projects that make up the Koku platform" >}}
   {{< card link="blog" title="Blog & Updates" icon="newspaper" subtitle="Latest news, releases, and articles" >}}
 {{< /cards >}}
