@@ -19,3 +19,5 @@ Documentation for the Project Koku ecosystem.
   environment or deploy on-premise.
 - **[Ecosystem](ecosystem/)** — All the projects that make up the Koku
   platform.
+- **[Integrations](integrations/)** — Connect Koku with external billing,
+  analytics, and automation systems.
